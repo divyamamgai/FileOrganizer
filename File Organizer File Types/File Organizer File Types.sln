@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "File Organizer File Types", "File Organizer File Types\File Organizer File Types.csproj", "{4A674FA2-3FE3-49D6-9094-A90F93B3504A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A674FA2-3FE3-49D6-9094-A90F93B3504A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A674FA2-3FE3-49D6-9094-A90F93B3504A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A674FA2-3FE3-49D6-9094-A90F93B3504A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A674FA2-3FE3-49D6-9094-A90F93B3504A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
