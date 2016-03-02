@@ -53,8 +53,7 @@ namespace FileOrganizerService {
             Log("Started", true);
             try {
                 if (!Initialized) {
-                    GroupCollectionObject = new GroupCollection(@"C:\Users\Divya Mamgai\Desktop\File Organizer\FileOrganiserGroups.xml", new TaskDetail(GetTaskDetails));
-                    //GroupCollectionObject.LogPath = LogPath;
+                    GroupCollectionObject = new GroupCollection(ConfigurationManager.AppSettings["FileOrganiserGroupsFilePath"], new TaskDetail(GetTaskDetails));
                     Log("Loaded Groups - " + GroupCollectionObject.GroupListWithTimer.Count.ToString(), true);
                     GroupCollectionObject.ScheduleGroups();
                     Initialized = true;
