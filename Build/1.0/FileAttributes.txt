@@ -1,0 +1,7 @@
+Name|Size|Item type
+Name|Contributing artists|Album|Year|Genre|Title|Track number|Bit rate|Album artist
+Name|Size|Item type|Authors|Pages|Word count|File version|Encryption status|Language
+Name|Size|Title|Camera model|Dimensions|Camera maker|Exposure time|F-stop|35mm focal length|ISO speed|Lens model|Max aperture
+Name|Size|Item type|File version
+Name|Size|Item type|File version|Language
+File name|File size|Year|Title|Data rate|Frame height|Frame rate|Frame width|Total Bitrate

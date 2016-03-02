@@ -63,8 +63,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tagger Control">
-      <HintPath>..\..\TaggerControl\TaggerControl\TaggerControl\bin\Release\Tagger Control.dll</HintPath>
+    <Reference Include="Tagger Control, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\My C# Templates\TaggerControl\TaggerControl\TaggerControl\bin\Release\Tagger Control.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

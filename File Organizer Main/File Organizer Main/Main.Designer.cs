@@ -27,12 +27,13 @@
             this.GroupsGroupBox = new System.Windows.Forms.GroupBox();
             this.GroupsFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.OptionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SortByComboBox = new System.Windows.Forms.ComboBox();
             this.SortByLabel = new System.Windows.Forms.Label();
             this.StartStopServiceButtion = new System.Windows.Forms.Button();
             this.AboutButton = new System.Windows.Forms.Button();
             this.CreateGroupButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.InstallOrUninstallServiceButton = new System.Windows.Forms.Button();
             this.GroupsGroupBox.SuspendLayout();
             this.OptionsGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -41,9 +42,9 @@
             // 
             this.GroupsGroupBox.Controls.Add(this.GroupsFlowPanel);
             this.GroupsGroupBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupsGroupBox.Location = new System.Drawing.Point(12, 71);
+            this.GroupsGroupBox.Location = new System.Drawing.Point(12, 91);
             this.GroupsGroupBox.Name = "GroupsGroupBox";
-            this.GroupsGroupBox.Size = new System.Drawing.Size(759, 478);
+            this.GroupsGroupBox.Size = new System.Drawing.Size(759, 458);
             this.GroupsGroupBox.TabIndex = 0;
             this.GroupsGroupBox.TabStop = false;
             this.GroupsGroupBox.Text = "Groups";
@@ -56,12 +57,12 @@
             this.GroupsFlowPanel.AutoScroll = true;
             this.GroupsFlowPanel.Location = new System.Drawing.Point(6, 22);
             this.GroupsFlowPanel.Name = "GroupsFlowPanel";
-            this.GroupsFlowPanel.Size = new System.Drawing.Size(747, 449);
+            this.GroupsFlowPanel.Size = new System.Drawing.Size(747, 429);
             this.GroupsFlowPanel.TabIndex = 0;
             // 
             // OptionsGroupBox
             // 
-            this.OptionsGroupBox.Controls.Add(this.label1);
+            this.OptionsGroupBox.Controls.Add(this.InstallOrUninstallServiceButton);
             this.OptionsGroupBox.Controls.Add(this.SortByComboBox);
             this.OptionsGroupBox.Controls.Add(this.SortByLabel);
             this.OptionsGroupBox.Controls.Add(this.StartStopServiceButtion);
@@ -74,6 +75,16 @@
             this.OptionsGroupBox.TabIndex = 1;
             this.OptionsGroupBox.TabStop = false;
             this.OptionsGroupBox.Text = "Options";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label1.Location = new System.Drawing.Point(560, 73);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(211, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Right Click On The Group To Execute It";
             // 
             // SortByComboBox
             // 
@@ -126,7 +137,7 @@
             this.AboutButton.TabIndex = 1;
             this.AboutButton.Text = "About";
             this.AboutButton.UseVisualStyleBackColor = true;
-            this.AboutButton.Click += new System.EventHandler(this.AboutButton_Click);
+            this.AboutButton.Click += new System.EventHandler(this.AboutButtonClick);
             // 
             // CreateGroupButton
             // 
@@ -139,15 +150,16 @@
             this.CreateGroupButton.UseVisualStyleBackColor = true;
             this.CreateGroupButton.Click += new System.EventHandler(this.CreateGroupButtonClick);
             // 
-            // label1
+            // InstallOrUninstallServiceButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label1.Location = new System.Drawing.Point(234, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(211, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Right Click On The Group To Execute It";
+            this.InstallOrUninstallServiceButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InstallOrUninstallServiceButton.Location = new System.Drawing.Point(213, 20);
+            this.InstallOrUninstallServiceButton.Name = "InstallOrUninstallServiceButton";
+            this.InstallOrUninstallServiceButton.Size = new System.Drawing.Size(120, 25);
+            this.InstallOrUninstallServiceButton.TabIndex = 4;
+            this.InstallOrUninstallServiceButton.Text = "Install Service";
+            this.InstallOrUninstallServiceButton.UseVisualStyleBackColor = true;
+            this.InstallOrUninstallServiceButton.Click += new System.EventHandler(this.InstallOrUninstallServiceButtonClick);
             // 
             // Main
             // 
@@ -155,6 +167,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.OptionsGroupBox);
             this.Controls.Add(this.GroupsGroupBox);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -168,6 +181,7 @@
             this.OptionsGroupBox.ResumeLayout(false);
             this.OptionsGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -182,5 +196,6 @@
         private System.Windows.Forms.Label SortByLabel;
         private System.Windows.Forms.ComboBox SortByComboBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button InstallOrUninstallServiceButton;
     }
 }

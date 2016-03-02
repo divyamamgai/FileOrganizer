@@ -118,9 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label8.Text" xml:space="preserve">
-    <value>We are a small team of developers with the sole intention of automating mundane tasks like organising files on the pc. This project was inspired
-by our desire to serve the pc using community as a whole, but mostly 
-by our laziness.</value>
+    <value>We are a small team of developers with the sole intention of automating mundane tasks like organising files on the pc. This project was inspired by our desire to serve the pc using community as a whole, but mostly by our laziness.</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>This software is for the purpose of organising files according to user preference. Once a task is created, the user can sit back and relax while the software takes care of renaming, moving and organising the files. So that you can concentrate on more important stuff like watching the movies you download or listening to that latest songs.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -328,9 +329,6 @@ by our laziness.</value>
         JS2GjZRm1n+aW5UkzV2n/nn/oUAAAGGhQAAAYfFjgawq/Xdr8RMAAFFkzWJ7LBNCCCGEEEIIIYQQQggh
         hBBCCCGEEEIIIYQQQvye++77/22EZp2koHg/AAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>This software is for the purpose of organising files according to user preference. Once a task is created, the user can sit back and relax while the software takes care of renaming, moving and organising the files. So that you can concentrate on more important stuff like watching the movies you download or listening to that latest song</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

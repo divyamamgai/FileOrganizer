@@ -328,6 +328,7 @@ namespace FileOrganizer {
         public static string GroupCollectionPath;
         public static Main MainFormObject;
         public static ServiceController FileOrganizerServiceControllerObject;
+        public static bool FileOrganizerServiceControllerInstalled;
 
         /// <summary>
         /// The main entry point for the application.
@@ -339,7 +340,8 @@ namespace FileOrganizer {
             OptionsObject = new Options(Application.StartupPath + @"\FileOrganiserOptions.xml");
             FileTypesObject = new FileTypes(Application.StartupPath + @"\FileTypes.txt");
             FileAttributesObject = new FileAttributes(Application.StartupPath + @"\FileAttributes.txt");
-            FileOrganizerServiceControllerObject = new ServiceController("File Organizer Service");
+            FileOrganizerServiceControllerInstalled = (new List<ServiceController>(ServiceController.GetServices())).FindIndex(sO => sO.ServiceName == "File Organizer Service") != -1;
+            if (FileOrganizerServiceControllerInstalled) FileOrganizerServiceControllerObject = new ServiceController("File Organizer Service");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             MainFormObject = new Main();

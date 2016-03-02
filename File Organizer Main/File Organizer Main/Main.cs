@@ -5,6 +5,8 @@ using System;
 using System.Threading;
 using System.Linq;
 using System.Collections.Generic;
+using System.ServiceProcess;
+using System.Diagnostics;
 
 namespace FileOrganizerMain {
     public partial class Main : Form {
@@ -17,12 +19,26 @@ namespace FileOrganizerMain {
             GroupsLoadedCount = 0;
             NumberOfGroups = Program.GroupCollectionObject.GroupWithoutTimerList.Count;
             InitializeComponent();
-            if (Program.FileOrganizerServiceControllerObject.Status == System.ServiceProcess.ServiceControllerStatus.Running)
-                StartStopServiceButtion.Text = "Stop Service";
-            else
-                StartStopServiceButtion.Text = "Start Service";
+            ServiceInstalledUpdateControls();
             foreach (Tuple<GroupDetails, TaskCollection> GroupTupleObject in Program.GroupCollectionObject.GroupWithoutTimerList)
                 ThreadPool.QueueUserWorkItem(new WaitCallback(PopulateGroups), GroupTupleObject);
+        }
+
+        public void ServiceInstalledUpdateControls() {
+            if (Program.FileOrganizerServiceControllerInstalled) {
+                if (Program.FileOrganizerServiceControllerObject.Status == ServiceControllerStatus.Running) {
+                    StartStopServiceButtion.Text = "Stop Service";
+                    InstallOrUninstallServiceButton.Enabled = false;
+                } else {
+                    InstallOrUninstallServiceButton.Enabled = true;
+                    InstallOrUninstallServiceButton.Text = "Uninstall Service";
+                    StartStopServiceButtion.Text = "Start Service";
+                }
+            } else {
+                InstallOrUninstallServiceButton.Enabled = true;
+                InstallOrUninstallServiceButton.Text = "Install Service";
+                StartStopServiceButtion.Enabled = false;
+            }
         }
 
         public void SortByChangeEnabled(bool enabled) {
@@ -160,14 +176,20 @@ namespace FileOrganizerMain {
         }
 
         public void StartStopService() {
-            if (Program.FileOrganizerServiceControllerObject.Status == System.ServiceProcess.ServiceControllerStatus.Running) {
-                Program.FileOrganizerServiceControllerObject.Stop();
-                Program.FileOrganizerServiceControllerObject.WaitForStatus(System.ServiceProcess.ServiceControllerStatus.Stopped);
-                ChangeStartStopServiceButtonText("Start Service", true);
-            } else {
-                Program.FileOrganizerServiceControllerObject.Start();
-                Program.FileOrganizerServiceControllerObject.WaitForStatus(System.ServiceProcess.ServiceControllerStatus.Running);
-                ChangeStartStopServiceButtonText("Stop Service", true);
+            try {
+                if (Program.FileOrganizerServiceControllerObject.Status == ServiceControllerStatus.Running) {
+                    Program.FileOrganizerServiceControllerObject.Stop();
+                    Program.FileOrganizerServiceControllerObject.WaitForStatus(ServiceControllerStatus.Stopped);
+                    ChangeStartStopServiceButtonText("Start Service", true);
+                    InstallOrUninstallServiceButton.Enabled = false;
+                } else {
+                    Program.FileOrganizerServiceControllerObject.Start();
+                    Program.FileOrganizerServiceControllerObject.WaitForStatus(ServiceControllerStatus.Running);
+                    ChangeStartStopServiceButtonText("Stop Service", true);
+                    InstallOrUninstallServiceButton.Enabled = false;
+                }
+            } catch (Exception ex) {
+                MessageBox.Show("An unexpected error occurred while changing service status." + vbCrLf + "Exception Message : " + ex.Message);
             }
         }
 
@@ -181,8 +203,40 @@ namespace FileOrganizerMain {
             Options.SaveOptions();
         }
 
-        private void AboutButton_Click(object sender, EventArgs e) {
+        private void AboutButtonClick(object sender, EventArgs e) {
             (new AboutUs.AboutUs()).ShowDialog();
+        }
+
+        private void InstallOrUninstallServiceButtonClick(object sender, EventArgs e) {
+            if (Program.FileOrganizerServiceControllerInstalled) {
+                if (Environment.Is64BitOperatingSystem) {
+                    try {
+                        Process.Start("UninstallService64.exe");
+                    } catch {
+                        MessageBox.Show("Cannot Uninstall the service, please try using the UninstallService64.exe file in the program directory.", "Failed Uninstallation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                } else {
+                    try {
+                        Process.Start("UninstallService.exe");
+                    } catch {
+                        MessageBox.Show("Cannot Uninstall the service, please try using the UninstallService.exe file in the program directory.", "Failed Uninstallation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            } else {
+                if (Environment.Is64BitOperatingSystem) {
+                    try {
+                        Process.Start("InstallService64.exe");
+                    } catch {
+                        MessageBox.Show("Cannot Install the service, please try using the InstallService64.exe file in the program directory.", "Failed Installation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                } else {
+                    try {
+                        Process.Start("InstallService.exe");
+                    } catch {
+                        MessageBox.Show("Cannot Install the service, please try using the InstallService.exe file in the program directory.", "Failed Installation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         private void SortByComboBoxSelectedIndexChanged(object sender, EventArgs e) {

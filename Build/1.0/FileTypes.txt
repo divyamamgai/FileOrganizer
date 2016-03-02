@@ -1,0 +1,7 @@
+7z|s7z|ace|afa|alz|apk|arc|arj|b1|ba|bh|cab|car|cfs|cpt|dar|dd|dgc|dmg|ear|gca|ha|hki|ice|iso|jar|kgb|lzh|lha|lzx|pak|partimg|paq6|paq7|paq8|pea|pim|pit|qda|rar|rk|sda|sea|sen|sfx|sit|sitx|sqx|tar.gz|tgz|tar.Z|tar.bz2|tbz2|tar.lzma|tlz|toast|uc|uc0|uc2|ucn|ur2|ue2|uca|uha|vcd|war|wim|xar|xp3|yz1|zip|zipx|zoo|zpaq|zz
+3gp|aa|aac|aax|act|aiff|amr|ape|au|awb|dct|dss|dvf|flac|gsm|iklax|ivs|m3u|m4a|m4p|mmf|mp3|mpa|mpc|msv|ogg|oga|opus|ra|rm|raw|tta|vox|wav|wma|wv|webm
+602|abw|acl|afp|ami|ans|asc|ccf|cwk|dbk|doc|docm|docx|dot|dotx|egt|epub|ezw|fdx|ftx|gdoc|html|hwp|hwpml|log|mbp|md|mcw|mobi|nb|nbp|odm|odt|ott|omm|pages|pap|pdax|pdf|rtf|quox|rpt|sdw|se|stw|sxw|tex|txt|uof|uoml|via|wpd|wps|wpt|wrd|wrf|wri|xhtml|xml|xps
+ani|bmp|gif|iff|img|jpg|jpeg|jpe|jpf|jpx|jp2|j2c|j2k|jpc|png|pbm|pgm|ppm|pnm|pfm|pam|tif|tiff
+ada|adb|2.ada|ads|1.ada|asm|s|bas|bb|clj|cls|cob|cbl|cpp|cc|cxx|c|cbp|cs|csproj|d|dbpro123|e|efs|egt|el|for|ftn|f|f77|f90|frm|frx|fth|ged|gm6|gmd|gmk|gml|go|hpp|hxx|hs|inc|java|lgt|lisp|m|m4|ml|n|nb|p|pas|pp|p|php|php3|php4|php5|phps|phtml|piv|pl|pm|prg|pro|pol|py|red|reds|rb|resx|rc|rc2|rkt|rktl|scala|scm|sd7|skb|skc|skd|skf|skg|ski|skk|skm|sko|skp|skq|sks|skt|skz|sln|spin|stk|swg|tcl|vap|vb|vbg|vbp|vip|vbproj|vcproj|vdproj|vdproj|xpl|xq|y
+app|bat|cgi|com|exe|gadget|msi
+264|3g2|3gp|3gpp|asf|asx|avc|avi|f4v|flv|m4v|mov|mp4|mpe|mpeg|mpg|mts|mxf|r3d|rm|swf|ts|vob|wm|wmv|mkv
