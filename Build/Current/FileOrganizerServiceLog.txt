@@ -1,0 +1,17 @@
+06/03/2016 06:58:06 PM :: Started
+06/03/2016 06:58:06 PM :: Loaded Groups - 1
+06/03/2016 07:39:30 PM :: Session Changed
+06/03/2016 07:39:31 PM :: Power Status Changed
+06/03/2016 07:56:10 PM :: Power Status Changed
+06/03/2016 07:56:10 PM :: Power Status Changed
+06/03/2016 07:56:11 PM :: Power Status Changed
+06/03/2016 07:56:18 PM :: Power Status Changed
+06/03/2016 08:11:45 PM :: Power Status Changed
+06/03/2016 08:11:45 PM :: Power Status Changed
+06/03/2016 08:11:55 PM :: Session Changed
+06/03/2016 08:14:00 PM :: Session Changed
+06/03/2016 08:14:00 PM :: Shutdown
+06/03/2016 08:22:20 PM :: Started
+06/03/2016 08:22:20 PM :: Loaded Groups - 1
+06/03/2016 08:22:27 PM :: Session Changed
+06/03/2016 08:33:40 PM :: Power Status Changed

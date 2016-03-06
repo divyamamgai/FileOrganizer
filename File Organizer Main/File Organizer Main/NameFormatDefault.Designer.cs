@@ -33,10 +33,10 @@
             this.NameFinalPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.Done = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.OKButton = new System.Windows.Forms.Button();
             this.AttributeDropDown = new System.Windows.Forms.ComboBox();
             this.FileAttributesLabel = new System.Windows.Forms.Label();
-            this.OKButton = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.NameSelectPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -74,6 +74,7 @@
             // 
             // Done
             // 
+            this.Done.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Done.Location = new System.Drawing.Point(676, 325);
             this.Done.Margin = new System.Windows.Forms.Padding(2);
             this.Done.Name = "Done";
@@ -97,16 +98,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Available Groups";
             // 
-            // groupBox2
+            // OKButton
             // 
-            this.groupBox2.Controls.Add(this.NameFinalPanel);
-            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(12, 147);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(761, 173);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Name Format";
+            this.OKButton.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.OKButton.Location = new System.Drawing.Point(683, 98);
+            this.OKButton.Margin = new System.Windows.Forms.Padding(2);
+            this.OKButton.Name = "OKButton";
+            this.OKButton.Size = new System.Drawing.Size(72, 25);
+            this.OKButton.TabIndex = 5;
+            this.OKButton.Text = "Add";
+            this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
             // AttributeDropDown
             // 
@@ -128,22 +130,22 @@
             this.FileAttributesLabel.TabIndex = 4;
             this.FileAttributesLabel.Text = "File Attributes : ";
             // 
-            // OKButton
+            // groupBox2
             // 
-            this.OKButton.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.OKButton.Location = new System.Drawing.Point(683, 98);
-            this.OKButton.Margin = new System.Windows.Forms.Padding(2);
-            this.OKButton.Name = "OKButton";
-            this.OKButton.Size = new System.Drawing.Size(72, 25);
-            this.OKButton.TabIndex = 5;
-            this.OKButton.Text = "Add";
-            this.OKButton.UseVisualStyleBackColor = true;
-            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
+            this.groupBox2.Controls.Add(this.NameFinalPanel);
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(12, 147);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(761, 173);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Name Format";
             // 
             // NameFormatDefault
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(784, 361);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.Done);

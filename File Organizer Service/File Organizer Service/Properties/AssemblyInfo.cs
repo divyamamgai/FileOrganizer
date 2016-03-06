@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("File Organizer Service")]
+[assembly: AssemblyTitle("File Organizer Service x64")]
 [assembly: AssemblyDescription("This is the underlying service which provides scheduling options to the tasks")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Divya Mamgai")]
-[assembly: AssemblyProduct("File Organizer Service")]
+[assembly: AssemblyProduct("File Organizer Service x64")]
 [assembly: AssemblyCopyright("2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

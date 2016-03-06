@@ -16,7 +16,7 @@ namespace FileOrganizerMain {
         public int TasksLoadedCount, NumberOfTasks, GroupID;
         public List<TaskButton> TaskButtonList;
         public GroupDetails GroupDetailsObject;
-        public TaskCollection TaskColletionObject;
+        public TaskCollection TaskCollectionObject;
         public GroupButton GroupButtonObject;
 
         public GroupForm(ref Tuple<GroupDetails, TaskCollection> groupTuppleObject, ref GroupButton groupButtonObject) {
@@ -32,7 +32,7 @@ namespace FileOrganizerMain {
             InitializeComponent();
             GroupExisting = false;
             GroupSaved = false;
-            TaskColletionObject = new TaskCollection();
+            TaskCollectionObject = new TaskCollection();
             GroupButtonObject = null;
 
             this.Text = "Create Group";
@@ -79,11 +79,33 @@ namespace FileOrganizerMain {
             GroupID = GroupDetailsObject.ID;
             GroupIDLabel.Text = "ID : " + GroupID.ToString();
             TasksLoadedCount = 0;
-            TaskColletionObject = GroupTuppleObject.Item2;
-            NumberOfTasks = TaskColletionObject.TaskList.Count;
+            TaskCollectionObject = GroupTuppleObject.Item2;
+            NumberOfTasks = TaskCollectionObject.TaskList.Count;
             TotalTasksLabel.Text = "Total Tasks : " + NumberOfTasks.ToString();
-            foreach (Task TaskObject in TaskColletionObject.TaskList)
+            foreach (Task TaskObject in TaskCollectionObject.TaskList)
                 ThreadPool.QueueUserWorkItem(new WaitCallback(PopulateTasks), TaskObject);
+        }
+
+        public void TaskButtonClick(object sender, MouseEventArgs e) {
+            TaskButton TaskButtonObject = (TaskButton)sender;
+            TaskForm TaskFormObject = new TaskForm(ref TaskButtonObject.TaskObject);
+            TaskFormObject.ShowDialog();
+            if (TaskFormObject.TaskObject != null) {
+                if (TaskFormObject.PerformDeletion) {
+                    TaskCollectionObject.TaskList.Remove(TaskFormObject.TaskObject);
+                    TaskButtonObject.Dispose();
+                    TotalTasksLabel.Text = "Total Tasks : " + TaskCollectionObject.TaskList.Count;
+                    if (TaskCollectionObject.TaskList.Count > 0) SortByChangeEnabled(true);
+                    else SortByChangeEnabled(false);
+                } else {
+                    int TaskIndex = TaskCollectionObject.TaskList.FindIndex(tO => tO.ID == TaskFormObject.TaskObject.ID);
+                    if (TaskIndex >= 0) {
+                        TaskCollectionObject.TaskList[TaskIndex] = TaskFormObject.TaskObject;
+                        TaskButtonObject.Initialize(ref TaskFormObject.TaskObject);
+                        TaskButtonObject.Invalidate();
+                    }
+                }
+            }
         }
 
         public void PopulateTasks(object taskObject) {
@@ -95,27 +117,7 @@ namespace FileOrganizerMain {
                     TaskButtonObject.Width = TasksFlowPanel.Width - 30;
                     TaskButtonObject.Height = 70;
                     TaskButtonObject.Padding = new Padding(5, 5, 5, 5);
-                    TaskButtonObject.MouseClick += new MouseEventHandler(delegate (object sender, MouseEventArgs e) {
-                        TaskButton TaskButtonObjectInner = (TaskButton)sender;
-                        TaskForm TaskFormObject = new TaskForm(ref TaskButtonObjectInner.TaskObject);
-                        TaskFormObject.ShowDialog();
-                        if (TaskFormObject.TaskObject != null) {
-                            if (TaskFormObject.PerformDeletion) {
-                                TaskColletionObject.TaskList.Remove(TaskFormObject.TaskObject);
-                                TaskButtonObjectInner.Dispose();
-                                TotalTasksLabel.Text = "Total Tasks : " + TaskColletionObject.TaskList.Count;
-                                if (TaskColletionObject.TaskList.Count > 0) SortByChangeEnabled(true);
-                                else SortByChangeEnabled(false);
-                            } else {
-                                int TaskIndex = TaskColletionObject.TaskList.FindIndex(tO => tO.ID == TaskFormObject.TaskObject.ID);
-                                if (TaskIndex >= 0) {
-                                    TaskColletionObject.TaskList[TaskIndex] = TaskFormObject.TaskObject;
-                                    TaskButtonObjectInner.Initialize(ref TaskFormObject.TaskObject);
-                                    TaskButtonObjectInner.Invalidate();
-                                }
-                            }
-                        }
-                    });
+                    TaskButtonObject.MouseClick += new MouseEventHandler(TaskButtonClick);
                     TasksFlowPanel.Controls.Add(TaskButtonObject);
                     if (++TasksLoadedCount == NumberOfTasks) {
                         TaskButtonList = TasksFlowPanel.Controls.OfType<TaskButton>().Cast<TaskButton>().ToList();
@@ -128,16 +130,13 @@ namespace FileOrganizerMain {
             }
         }
 
-        public void PopulateTask(object taskObject) {
+        public void PopulateTasksWithoutThread(object taskObject) {
             Task TaskObject = (Task)taskObject;
             TaskButton TaskButtonObject = new TaskButton(ref TaskObject);
             TaskButtonObject.Width = TasksFlowPanel.Width - 30;
             TaskButtonObject.Height = 70;
             TaskButtonObject.Padding = new Padding(5, 5, 5, 5);
-            TaskButtonObject.MouseClick += new MouseEventHandler(delegate (object sender, MouseEventArgs e) {
-                TaskForm TaskFormObject = new TaskForm(ref TaskObject);
-                TaskFormObject.ShowDialog();
-            });
+            TaskButtonObject.MouseClick += new MouseEventHandler(TaskButtonClick);
             TasksFlowPanel.Controls.Add(TaskButtonObject);
             if (TaskButtonList == null) TaskButtonList = new List<TaskButton>();
             TaskButtonList.Add(TaskButtonObject);
@@ -365,19 +364,19 @@ namespace FileOrganizerMain {
                 || e.KeyCode == Keys.Oemcomma && e.Shift || e.KeyCode == Keys.OemPeriod && e.Shift) e.SuppressKeyPress = true;
         }
 
-        private void AddTaskButton_Click(object sender, EventArgs e) {
+        private void AddTaskButtonClick(object sender, EventArgs e) {
             TaskForm TaskFormObject = new TaskForm();
             TaskFormObject.ShowDialog();
             if (TaskFormObject.TaskObject != null) {
-                TaskColletionObject.TaskList.Add(TaskFormObject.TaskObject);
-                PopulateTask(TaskFormObject.TaskObject);
-                TotalTasksLabel.Text = "Total Tasks : " + TaskColletionObject.TaskList.Count;
-                if (TaskColletionObject.TaskList.Count > 0) SortByChangeEnabled(true);
+                TaskCollectionObject.TaskList.Add(TaskFormObject.TaskObject);
+                PopulateTasksWithoutThread(TaskFormObject.TaskObject);
+                TotalTasksLabel.Text = "Total Tasks : " + TaskCollectionObject.TaskList.Count;
+                if (TaskCollectionObject.TaskList.Count > 0) SortByChangeEnabled(true);
                 Options.LastTaskID++;
             }
         }
 
-        private void DeleteGroup_Click(object sender, EventArgs e) {
+        private void DeleteGroupClick(object sender, EventArgs e) {
             DialogResult ConfirmDelete = MessageBox.Show("Do you really want to delete " + GroupDetailsObject.Name + " group?" + vbCrLf + "Note : This is not reversible!", "Delete Group Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (ConfirmDelete == DialogResult.Yes) {
                 Program.GroupCollectionObject.GroupWithoutTimerList.Remove(GroupTuppleObject);
@@ -407,9 +406,9 @@ namespace FileOrganizerMain {
                             GroupDetailsObject.ScheduleDay = DayComboBox.SelectedIndex + 1;
                             GroupDetailsObject.ScheduleInterval = Convert.ToInt16(IntervalTextBox.Text);
                             GroupDetailsObject.ScheduleTime = DateTime.Parse(HourTextBox.Text + ":" + MinuteTextBox.Text);
-                            GroupTuppleObject = new Tuple<GroupDetails, TaskCollection>(GroupDetailsObject, TaskColletionObject);
+                            GroupTuppleObject = new Tuple<GroupDetails, TaskCollection>(GroupDetailsObject, TaskCollectionObject);
                             Program.GroupCollectionObject.GroupWithoutTimerList[IndexOfGroupObject] = GroupTuppleObject;
-                            TaskColletionObject.SaveGroup(PathTextBox.Text);
+                            TaskCollectionObject.SaveGroup(PathTextBox.Text);
                             Program.GroupCollectionObject.PerformSaveWithoutTimer(Program.GroupCollectionPath);
                             GroupButtonObject.Initialize(ref GroupDetailsObject);
                             GroupButtonObject.Invalidate();
@@ -417,9 +416,9 @@ namespace FileOrganizerMain {
                             GroupDetailsObject = new GroupDetails(GroupID, NameTextBox.Text, PathTextBox.Text, OccurrenceComboBox.SelectedItem.ToString().ToLower(),
                             DayComboBox.SelectedIndex + 1, Convert.ToInt16(IntervalTextBox.Text), DateTime.Parse(HourTextBox.Text + ":" + MinuteTextBox.Text),
                             EnabledComboBox.SelectedIndex == 0);
-                            GroupTuppleObject = new Tuple<GroupDetails, TaskCollection>(GroupDetailsObject, TaskColletionObject);
-                            Program.GroupCollectionObject.GroupWithoutTimerList.Add(new Tuple<GroupDetails, TaskCollection>(GroupDetailsObject, TaskColletionObject));
-                            TaskColletionObject.SaveGroup(PathTextBox.Text);
+                            GroupTuppleObject = new Tuple<GroupDetails, TaskCollection>(GroupDetailsObject, TaskCollectionObject);
+                            Program.GroupCollectionObject.GroupWithoutTimerList.Add(new Tuple<GroupDetails, TaskCollection>(GroupDetailsObject, TaskCollectionObject));
+                            TaskCollectionObject.SaveGroup(PathTextBox.Text);
                             Program.GroupCollectionObject.PerformSaveWithoutTimer(Program.GroupCollectionPath);
                             Options.LastGroupID++;
                             Options.SaveOptions();

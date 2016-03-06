@@ -10,8 +10,7 @@ using System.ServiceProcess;
 
 namespace FileOrganizer {
     public class PathFormatter {
-        public static int MaxPathSize = 100;
-        public static string FormatPath(string pathString) {
+        public static string FormatPath(string pathString, int MaxPathSize = 100) {
             string PathString = pathString;
             if (PathString.Length > MaxPathSize) {
                 string FileName = System.IO.Path.GetFileName(pathString);
@@ -45,7 +44,7 @@ namespace FileOrganizer {
         public Rectangle BackgroundRectangle, BorderRectangle;
         public int IDPositionX, PathPositionY, ServiceInfoPositionY;
         public string IDString, PathString, ServiceInfoString;
-        public bool Selected = false, Hover = false, Initialized = false;
+        public bool Selected, Hover, Initialized;
         public GroupDetails GroupDetailsObject;
 
         public GroupButton(ref GroupDetails groupDetailsObject) {
@@ -68,6 +67,9 @@ namespace FileOrganizer {
                     ServiceInfoString += "Occurrence : Interval   Interval : " + GroupDetailsObject.ScheduleInterval + " min";
                     break;
             }
+            Selected = false;
+            Hover = false;
+            Initialized = false;
         }
 
         protected override Size DefaultSize {
@@ -141,7 +143,7 @@ namespace FileOrganizer {
         public Rectangle BackgroundRectangle, BorderRectangle;
         public int IDPositionX, PerformPositionX, PerformPositionY, SourcePositionY, DestinationPositionY;
         public string IDString, SourceString, DestinationString, PerformString;
-        public bool Selected = false, Hover = false, Initialized = false;
+        public bool Selected, Hover, Initialized;
         public Task TaskObject;
 
         public TaskButton(ref Task taskObject) {
@@ -154,6 +156,8 @@ namespace FileOrganizer {
             PerformString = "Perform : " + TaskObject.PerformType;
             SourceString = "Source : " + PathFormatter.FormatPath(TaskObject.Source.FullName);
             DestinationString = "Destination : " + PathFormatter.FormatPath(TaskObject.Destination.FullName);
+            Selected = false;
+            Hover = false;
             Initialized = false;
         }
 
@@ -200,8 +204,85 @@ namespace FileOrganizer {
                 SourcePositionY = ClientSize.Height - FontHeight * 2 - Padding.Bottom;
                 Initialized = true;
             }
-            e.Graphics.FillRectangle(Selected ? (Hover ? SelectedHoverColor : SelectedNormalColor) : (Hover ? HoverColor : NormalColor), BackgroundRectangle);
-            e.Graphics.DrawRectangle(Hover ? (BorderHoverColor) : (BorderNormalColor), BorderRectangle);
+            e.Graphics.FillRectangle(Selected ? (Hover ? (TaskObject.Enabled ? SelectedHoverColor : DisabledSelectedHoverColor) : (TaskObject.Enabled ? SelectedNormalColor : DisabledSelectedNormalColor)) : (Hover ? (TaskObject.Enabled ? HoverColor : DisabledHoverColor) : (TaskObject.Enabled ? NormalColor : DisabledNormalColor)), BackgroundRectangle);
+            e.Graphics.DrawRectangle(Hover ? (TaskObject.Enabled ? BorderHoverColor : DisabledBorderHoverColor) : (TaskObject.Enabled ? BorderNormalColor : DisabledBorderNormalColor), BorderRectangle);
+            e.Graphics.DrawString(TaskObject.Name, PrimaryFont, PrimaryFontColor, 3, 3);
+            e.Graphics.DrawString(IDString, Font, SecondaryFontColor, IDPositionX, 3);
+            e.Graphics.DrawString(PerformString, Font, SecondaryFontColor, PerformPositionX, PerformPositionY);
+            e.Graphics.DrawString(SourceString, Font, SecondaryFontColor, 3, SourcePositionY);
+            e.Graphics.DrawString(DestinationString, Font, SecondaryFontColor, 3, DestinationPositionY);
+            base.OnPaint(e);
+        }
+    }
+
+    public class TaskRunnerButton : Control {
+
+        public static SolidBrush ProgressColor = new SolidBrush(Color.FromArgb(255, 67, 160, 71)),
+            CompletedColor = new SolidBrush(Color.FromArgb(255, 85, 139, 47)),
+            RunningColor = new SolidBrush(Color.FromArgb(255, 46, 125, 50)),
+            NormalColor = new SolidBrush(Color.FromArgb(255, 27, 94, 32)),
+            DisabledNormalColor = new SolidBrush(Color.FromArgb(255, 55, 71, 79)),
+            PrimaryFontColor = new SolidBrush(Color.FromArgb(235, 255, 255, 255)),
+            SecondaryFontColor = new SolidBrush(Color.FromArgb(235, 245, 245, 245));
+        public static Pen BorderNormalColor = new Pen(new SolidBrush(Color.FromArgb(255, 27, 94, 32))),
+            DisabledBorderNormalColor = new Pen(new SolidBrush(Color.FromArgb(255, 27, 94, 32)));
+        public static Font PrimaryFont = new Font("Segoe UI", 16);
+        public Rectangle BackgroundRectangle, BorderRectangle;
+        public RectangleF ProgressRectangle;
+        public int IDPositionX, PerformPositionX, PerformPositionY, SourcePositionY, DestinationPositionY;
+        public string IDString, SourceString, DestinationString, PerformString;
+        public bool Initialized, Running;
+        public Task TaskObject;
+        float PercentageDone = 0;
+
+        public TaskRunnerButton(ref Task taskObject) {
+            Initialize(ref taskObject);
+        }
+
+        public void Initialize(ref Task taskObject) {
+            TaskObject = taskObject;
+            IDString = "ID : " + TaskObject.ID.ToString();
+            PerformString = "Perform : " + TaskObject.PerformType;
+            SourceString = "Source : " + PathFormatter.FormatPath(TaskObject.Source.FullName, 64);
+            DestinationString = "Destination : " + PathFormatter.FormatPath(TaskObject.Destination.FullName, 64);
+            Initialized = false;
+            Running = false;
+        }
+
+        public void ChangePercentageDone(float percentageDone) {
+            PercentageDone = percentageDone;
+            ProgressRectangle.Width = PercentageDone * Width;
+            Invalidate();
+        }
+
+        public void ChangeRunning(bool running) {
+            Running = running;
+            Invalidate();
+        }
+
+        protected override Size DefaultSize {
+            get {
+                Width = 717;
+                Height = 70;
+                return base.DefaultSize;
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e) {
+            if (!Initialized) {
+                BackgroundRectangle = new Rectangle(0, 0, Width, Height);
+                ProgressRectangle = new RectangleF(0, 0, PercentageDone, Height);
+                BorderRectangle = new Rectangle(0, 0, Width - 1, Height - 1);
+                IDPositionX = ClientSize.Width - Convert.ToInt16(e.Graphics.MeasureString(IDString, Font).Width) - Padding.Right;
+                PerformPositionX = ClientSize.Width - Convert.ToInt16(e.Graphics.MeasureString(PerformString, Font).Width) - Padding.Right;
+                PerformPositionY = FontHeight + 3;
+                DestinationPositionY = ClientSize.Height - FontHeight - Padding.Bottom;
+                SourcePositionY = ClientSize.Height - FontHeight * 2 - Padding.Bottom;
+                Initialized = true;
+            }
+            e.Graphics.FillRectangle(TaskObject.Enabled ? (Running ? RunningColor : NormalColor) : DisabledNormalColor, BackgroundRectangle);
+            if (TaskObject.Enabled) e.Graphics.FillRectangle(PercentageDone >= 1 ? CompletedColor : ProgressColor, ProgressRectangle);
+            e.Graphics.DrawRectangle(TaskObject.Enabled ? BorderNormalColor : DisabledBorderNormalColor, BorderRectangle);
             e.Graphics.DrawString(TaskObject.Name, PrimaryFont, PrimaryFontColor, 3, 3);
             e.Graphics.DrawString(IDString, Font, SecondaryFontColor, IDPositionX, 3);
             e.Graphics.DrawString(PerformString, Font, SecondaryFontColor, PerformPositionX, PerformPositionY);

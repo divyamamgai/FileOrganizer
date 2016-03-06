@@ -43,7 +43,7 @@
             this.SelectNoneButtonAtt = new System.Windows.Forms.Button();
             this.SelectAllButtonAtt = new System.Windows.Forms.Button();
             this.FileAttributeFLP = new System.Windows.Forms.FlowLayoutPanel();
-            this.TaskEnableCB = new System.Windows.Forms.CheckBox();
+            this.TaskEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.MatchCaseButton = new System.Windows.Forms.Button();
             this.RegexTextBox = new System.Windows.Forms.TextBox();
             this.RegexLabel = new System.Windows.Forms.Label();
@@ -70,7 +70,7 @@
             this.CancelTaskbtn.Name = "CancelTaskbtn";
             this.CancelTaskbtn.Size = new System.Drawing.Size(96, 25);
             this.CancelTaskbtn.TabIndex = 6;
-            this.CancelTaskbtn.Text = "Cancel";
+            this.CancelTaskbtn.Text = "Close";
             this.CancelTaskbtn.UseVisualStyleBackColor = true;
             this.CancelTaskbtn.Click += new System.EventHandler(this.CancelTaskbtn_Click);
             // 
@@ -187,13 +187,13 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.ItemSize = new System.Drawing.Size(72, 20);
             this.tabControl1.Location = new System.Drawing.Point(11, 159);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(762, 363);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 44;
             // 
             // tabPage1
@@ -239,6 +239,7 @@
             this.FileExtensionDisplayFLP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.FileExtensionDisplayFLP.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FileExtensionDisplayFLP.Location = new System.Drawing.Point(4, 4);
             this.FileExtensionDisplayFLP.Margin = new System.Windows.Forms.Padding(2);
             this.FileExtensionDisplayFLP.Name = "FileExtensionDisplayFLP";
@@ -290,25 +291,26 @@
             this.FileAttributeFLP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.FileAttributeFLP.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FileAttributeFLP.Location = new System.Drawing.Point(4, 4);
             this.FileAttributeFLP.Margin = new System.Windows.Forms.Padding(2);
             this.FileAttributeFLP.Name = "FileAttributeFLP";
             this.FileAttributeFLP.Size = new System.Drawing.Size(746, 298);
             this.FileAttributeFLP.TabIndex = 44;
             // 
-            // TaskEnableCB
+            // TaskEnabledCheckBox
             // 
-            this.TaskEnableCB.AutoSize = true;
-            this.TaskEnableCB.Checked = true;
-            this.TaskEnableCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.TaskEnableCB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TaskEnableCB.Location = new System.Drawing.Point(586, 22);
-            this.TaskEnableCB.Margin = new System.Windows.Forms.Padding(2);
-            this.TaskEnableCB.Name = "TaskEnableCB";
-            this.TaskEnableCB.Size = new System.Drawing.Size(87, 19);
-            this.TaskEnableCB.TabIndex = 45;
-            this.TaskEnableCB.Text = "Task Enable";
-            this.TaskEnableCB.UseVisualStyleBackColor = true;
+            this.TaskEnabledCheckBox.AutoSize = true;
+            this.TaskEnabledCheckBox.Checked = true;
+            this.TaskEnabledCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.TaskEnabledCheckBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TaskEnabledCheckBox.Location = new System.Drawing.Point(551, 22);
+            this.TaskEnabledCheckBox.Margin = new System.Windows.Forms.Padding(2);
+            this.TaskEnabledCheckBox.Name = "TaskEnabledCheckBox";
+            this.TaskEnabledCheckBox.Size = new System.Drawing.Size(94, 19);
+            this.TaskEnabledCheckBox.TabIndex = 45;
+            this.TaskEnabledCheckBox.Text = "Task Enabled";
+            this.TaskEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // MatchCaseButton
             // 
@@ -438,6 +440,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.DeleteTaskButton);
             this.Controls.Add(this.PerformTypeComboBox);
@@ -449,7 +452,7 @@
             this.Controls.Add(this.MatchCaseButton);
             this.Controls.Add(this.RegexTextBox);
             this.Controls.Add(this.RegexLabel);
-            this.Controls.Add(this.TaskEnableCB);
+            this.Controls.Add(this.TaskEnabledCheckBox);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.FileTypeCB);
             this.Controls.Add(this.FileTypeLabel);
@@ -498,7 +501,7 @@
         private System.Windows.Forms.Button SelectNoneButtonAtt;
         private System.Windows.Forms.Button SelectAllButtonAtt;
         private System.Windows.Forms.FlowLayoutPanel FileAttributeFLP;
-        private System.Windows.Forms.CheckBox TaskEnableCB;
+        private System.Windows.Forms.CheckBox TaskEnabledCheckBox;
         private System.Windows.Forms.Button MatchCaseButton;
         private System.Windows.Forms.TextBox RegexTextBox;
         private System.Windows.Forms.Label RegexLabel;

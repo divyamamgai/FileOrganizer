@@ -1,0 +1,15 @@
+﻿Installing assembly 'E:\My Creations\Softwares\File Organizer\Build\Current\File Organizer Service x64.exe'.
+Affected parameters are:
+   logtoconsole = 
+   i = 
+   assemblypath = E:\My Creations\Softwares\File Organizer\Build\Current\File Organizer Service x64.exe
+   logfile = E:\My Creations\Softwares\File Organizer\Build\Current\File Organizer Service x64.InstallLog
+Installing service File Organizer Service...
+Service File Organizer Service has been successfully installed.
+Creating EventLog source File Organizer Service in log Application...
+Committing assembly 'E:\My Creations\Softwares\File Organizer\Build\Current\File Organizer Service x64.exe'.
+Affected parameters are:
+   logtoconsole = 
+   i = 
+   assemblypath = E:\My Creations\Softwares\File Organizer\Build\Current\File Organizer Service x64.exe
+   logfile = E:\My Creations\Softwares\File Organizer\Build\Current\File Organizer Service x64.InstallLog

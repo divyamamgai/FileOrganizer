@@ -17,79 +17,14 @@ namespace MatchCaseNameSpace {
 
         public NameFormatDefault(List<Tuple<int, string>> TagGroupListArg, string RegexFinalArg, FileType FileTypePassed) {
             InitializeComponent();
-            switch (FileTypePassed) {
-                case FileType.Compressed:
-                    AttributeDropDown.Items.Add("Name");
-                    AttributeDropDown.Items.Add("Size");
-                    AttributeDropDown.Items.Add("Item Type");
-                    break;
-                case FileType.Audio:
-                    AttributeDropDown.Items.Add("Name");
-                    AttributeDropDown.Items.Add("Contributing Artists");
-                    AttributeDropDown.Items.Add("Album");
-                    AttributeDropDown.Items.Add("Year");
-                    AttributeDropDown.Items.Add("Genre");
-                    AttributeDropDown.Items.Add("Title");
-                    AttributeDropDown.Items.Add("Track Number");
-                    AttributeDropDown.Items.Add("Bit Rate");
-                    AttributeDropDown.Items.Add("Album Artist");
-                    break;
-                case FileType.Document:
-                    AttributeDropDown.Items.Add("Name");
-                    AttributeDropDown.Items.Add("Size");
-                    AttributeDropDown.Items.Add("Item Type");
-                    AttributeDropDown.Items.Add("Author");
-                    AttributeDropDown.Items.Add("Pages");
-                    AttributeDropDown.Items.Add("Word Count");
-                    AttributeDropDown.Items.Add("File Version");
-                    AttributeDropDown.Items.Add("Encryption Status");
-                    AttributeDropDown.Items.Add("Language");
-                    break;
-                case FileType.Image:
-                    AttributeDropDown.Items.Add("Name");
-                    AttributeDropDown.Items.Add("Size");
-                    AttributeDropDown.Items.Add("Title");
-                    AttributeDropDown.Items.Add("Camera Model");
-                    AttributeDropDown.Items.Add("Dimensions");
-                    AttributeDropDown.Items.Add("Camera Maker");
-                    AttributeDropDown.Items.Add("Exposure Time");
-                    AttributeDropDown.Items.Add("F-Stop");
-                    AttributeDropDown.Items.Add("35mm focal length");
-                    AttributeDropDown.Items.Add("ISO speed");
-                    AttributeDropDown.Items.Add("Lens model");
-                    AttributeDropDown.Items.Add("Max aperture");
-                    break;
-                case FileType.SourceCode:
-                    AttributeDropDown.Items.Add("Name");
-                    AttributeDropDown.Items.Add("Size");
-                    AttributeDropDown.Items.Add("Item Type");
-                    AttributeDropDown.Items.Add("File Version");
-                    break;
-                case FileType.Executable:
-                    AttributeDropDown.Items.Add("Name");
-                    AttributeDropDown.Items.Add("Size");
-                    AttributeDropDown.Items.Add("Item Type");
-                    AttributeDropDown.Items.Add("File Version");
-                    AttributeDropDown.Items.Add("Language");
-                    break;
-                case FileType.Video:
-                    AttributeDropDown.Items.Add("Name");
-                    AttributeDropDown.Items.Add("Size");
-                    AttributeDropDown.Items.Add("Year");
-                    AttributeDropDown.Items.Add("Title");
-                    AttributeDropDown.Items.Add("Data Rate");
-                    AttributeDropDown.Items.Add("Frame Height");
-                    AttributeDropDown.Items.Add("Frame Rate");
-                    AttributeDropDown.Items.Add("Frame Width");
-                    AttributeDropDown.Items.Add("Total Bitrate");
-                    break;
-            }
+            foreach (string Attribute in FileAttributes.GetAttributeList(FileTypePassed)) AttributeDropDown.Items.Add(Attribute);
             AttributeDropDown.SelectedIndex = 0;
             RegexFinal = RegexFinalArg;
             int i = 1;
             foreach (Tuple<int, string> t in TagGroupListArg) {
                 Button NameButton = new Button();
                 NameButton.Text = t.Item2;
+                NameButton.BackColor = Color.Transparent;
                 NameButton.AutoSize = true;
                 NameButton.Margin = new Padding(2, 2, 2, 2);
                 NameSelectPanel.Controls.Add(NameButton);

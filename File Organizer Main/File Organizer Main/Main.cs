@@ -31,9 +31,9 @@ namespace FileOrganizerMain {
                     InstallOrUninstallServiceButton.Enabled = false;
                 } else {
                     InstallOrUninstallServiceButton.Enabled = true;
-                    InstallOrUninstallServiceButton.Text = "Uninstall Service";
                     StartStopServiceButtion.Text = "Start Service";
                 }
+                InstallOrUninstallServiceButton.Text = "Uninstall Service";
             } else {
                 InstallOrUninstallServiceButton.Enabled = true;
                 InstallOrUninstallServiceButton.Text = "Install Service";
@@ -57,13 +57,15 @@ namespace FileOrganizerMain {
                     GroupButtonObject.Height = 70;
                     GroupButtonObject.Padding = new Padding(5, 5, 5, 5);
                     GroupButtonObject.MouseClick += new MouseEventHandler(delegate (object sender, MouseEventArgs e) {
-                        if (e.Button == MouseButtons.Left) {
-                            GroupForm GroupFormObject = new GroupForm(ref GroupTupleObject, ref GroupButtonObject);
-                            GroupFormObject.ShowDialog();
-                        } else if (e.Button == MouseButtons.Right && GroupTupleObject.Item1.Enabled && GroupTupleObject.Item2.TaskList.Count > 0) {
-                            GroupRunner GroupRunnerFormObject = new GroupRunner(ref GroupTupleObject);
-                            GroupRunnerFormObject.ShowDialog();
-                        }
+                        try {
+                            if (e.Button == MouseButtons.Left) {
+                                GroupForm GroupFormObject = new GroupForm(ref GroupTupleObject, ref GroupButtonObject);
+                                GroupFormObject.ShowDialog();
+                            } else if (e.Button == MouseButtons.Right && GroupTupleObject.Item1.Enabled && GroupTupleObject.Item2.TaskList.Count > 0) {
+                                GroupRunner GroupRunnerFormObject = new GroupRunner(ref GroupTupleObject);
+                                GroupRunnerFormObject.ShowDialog();
+                            }
+                        } catch { }
                     });
                     GroupsFlowPanel.Controls.Add(GroupButtonObject);
                     if (++GroupsLoadedCount == NumberOfGroups) {
@@ -97,72 +99,74 @@ namespace FileOrganizerMain {
         }
 
         public void SortGroups(int SortType) {
-            switch (SortType) {
-                case 0:
-                    GroupButtonList.Sort(delegate (GroupButton GroupButtonOne, GroupButton GroupButtonTwo) {
-                        try {
-                            if (GroupButtonOne == null && GroupButtonTwo == null) return 0;
-                            else if (GroupButtonOne == null) return -1;
-                            else if (GroupButtonTwo == null) return 1;
-                            else return GroupButtonOne.GroupDetailsObject.ID.CompareTo(GroupButtonTwo.GroupDetailsObject.ID);
-                        } catch {
-                            return 0;
-                        }
-                    });
-                    break;
-                case 1:
-                    GroupButtonList.Sort(delegate (GroupButton GroupButtonOne, GroupButton GroupButtonTwo) {
-                        try {
-                            if (GroupButtonOne == null && GroupButtonTwo == null) return 0;
-                            else if (GroupButtonOne == null) return -1;
-                            else if (GroupButtonTwo == null) return 1;
-                            else return GroupButtonOne.GroupDetailsObject.Name.CompareTo(GroupButtonTwo.GroupDetailsObject.Name);
-                        } catch {
-                            return 0;
-                        }
-                    });
-                    break;
-                case 2:
-                    GroupButtonList.Sort(delegate (GroupButton GroupButtonOne, GroupButton GroupButtonTwo) {
-                        try {
-                            if (GroupButtonOne == null && GroupButtonTwo == null) return 0;
-                            else if (GroupButtonOne == null) return -1;
-                            else if (GroupButtonTwo == null) return 1;
-                            else return GroupButtonOne.GroupDetailsObject.ScheduleTime.CompareTo(GroupButtonTwo.GroupDetailsObject.ScheduleTime);
-                        } catch {
-                            return 0;
-                        }
-                    });
-                    break;
-                case 3:
-                    GroupButtonList.Sort(delegate (GroupButton GroupButtonOne, GroupButton GroupButtonTwo) {
-                        try {
-                            if (GroupButtonOne == null && GroupButtonTwo == null) return 0;
-                            else if (GroupButtonOne == null) return -1;
-                            else if (GroupButtonTwo == null) return 1;
-                            else return GroupButtonOne.GroupDetailsObject.ScheduleDay.CompareTo(GroupButtonTwo.GroupDetailsObject.ScheduleDay);
-                        } catch {
-                            return 0;
-                        }
-                    });
-                    break;
-                case 4:
-                    GroupButtonList.Sort(delegate (GroupButton GroupButtonOne, GroupButton GroupButtonTwo) {
-                        try {
-                            if (GroupButtonOne == null && GroupButtonTwo == null) return 0;
-                            else if (GroupButtonOne == null) return -1;
-                            else if (GroupButtonTwo == null) return 1;
-                            else return GroupButtonOne.GroupDetailsObject.ScheduleInterval.CompareTo(GroupButtonTwo.GroupDetailsObject.ScheduleInterval);
-                        } catch {
-                            return 0;
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-            int i = 0;
-            for (; i < GroupButtonList.Count; i++) GroupsFlowPanel.Controls.SetChildIndex(GroupButtonList[i], i);
+            try {
+                switch (SortType) {
+                    case 0:
+                        GroupButtonList.Sort(delegate (GroupButton GroupButtonOne, GroupButton GroupButtonTwo) {
+                            try {
+                                if (GroupButtonOne == null && GroupButtonTwo == null) return 0;
+                                else if (GroupButtonOne == null) return -1;
+                                else if (GroupButtonTwo == null) return 1;
+                                else return GroupButtonOne.GroupDetailsObject.ID.CompareTo(GroupButtonTwo.GroupDetailsObject.ID);
+                            } catch {
+                                return 0;
+                            }
+                        });
+                        break;
+                    case 1:
+                        GroupButtonList.Sort(delegate (GroupButton GroupButtonOne, GroupButton GroupButtonTwo) {
+                            try {
+                                if (GroupButtonOne == null && GroupButtonTwo == null) return 0;
+                                else if (GroupButtonOne == null) return -1;
+                                else if (GroupButtonTwo == null) return 1;
+                                else return GroupButtonOne.GroupDetailsObject.Name.CompareTo(GroupButtonTwo.GroupDetailsObject.Name);
+                            } catch {
+                                return 0;
+                            }
+                        });
+                        break;
+                    case 2:
+                        GroupButtonList.Sort(delegate (GroupButton GroupButtonOne, GroupButton GroupButtonTwo) {
+                            try {
+                                if (GroupButtonOne == null && GroupButtonTwo == null) return 0;
+                                else if (GroupButtonOne == null) return -1;
+                                else if (GroupButtonTwo == null) return 1;
+                                else return GroupButtonOne.GroupDetailsObject.ScheduleTime.CompareTo(GroupButtonTwo.GroupDetailsObject.ScheduleTime);
+                            } catch {
+                                return 0;
+                            }
+                        });
+                        break;
+                    case 3:
+                        GroupButtonList.Sort(delegate (GroupButton GroupButtonOne, GroupButton GroupButtonTwo) {
+                            try {
+                                if (GroupButtonOne == null && GroupButtonTwo == null) return 0;
+                                else if (GroupButtonOne == null) return -1;
+                                else if (GroupButtonTwo == null) return 1;
+                                else return GroupButtonOne.GroupDetailsObject.ScheduleDay.CompareTo(GroupButtonTwo.GroupDetailsObject.ScheduleDay);
+                            } catch {
+                                return 0;
+                            }
+                        });
+                        break;
+                    case 4:
+                        GroupButtonList.Sort(delegate (GroupButton GroupButtonOne, GroupButton GroupButtonTwo) {
+                            try {
+                                if (GroupButtonOne == null && GroupButtonTwo == null) return 0;
+                                else if (GroupButtonOne == null) return -1;
+                                else if (GroupButtonTwo == null) return 1;
+                                else return GroupButtonOne.GroupDetailsObject.ScheduleInterval.CompareTo(GroupButtonTwo.GroupDetailsObject.ScheduleInterval);
+                            } catch {
+                                return 0;
+                            }
+                        });
+                        break;
+                    default:
+                        break;
+                }
+                int i = 0;
+                for (; i < GroupButtonList.Count; i++) GroupsFlowPanel.Controls.SetChildIndex(GroupButtonList[i], i);
+            } catch { }
         }
 
         public void ChangeStartStopServiceButtonText(string text, bool enabled) {
@@ -181,7 +185,7 @@ namespace FileOrganizerMain {
                     Program.FileOrganizerServiceControllerObject.Stop();
                     Program.FileOrganizerServiceControllerObject.WaitForStatus(ServiceControllerStatus.Stopped);
                     ChangeStartStopServiceButtonText("Start Service", true);
-                    InstallOrUninstallServiceButton.Enabled = false;
+                    InstallOrUninstallServiceButton.Enabled = true;
                 } else {
                     Program.FileOrganizerServiceControllerObject.Start();
                     Program.FileOrganizerServiceControllerObject.WaitForStatus(ServiceControllerStatus.Running);

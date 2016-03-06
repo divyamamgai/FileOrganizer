@@ -6,7 +6,7 @@ set PATH=%PATH%;%DOTNETFX%
 
 echo # Installing File Organizer Service...
 echo ---------------------------------------------------
-InstallUtil /i "%~dp0File Organizer Service.exe"
+InstallUtil /i "%~dp0File Organizer Service x64.exe"
 echo ---------------------------------------------------
 echo # Done!
 pause

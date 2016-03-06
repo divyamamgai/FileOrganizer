@@ -2,13 +2,11 @@
 using System.Diagnostics;
 using System.ServiceProcess;
 using System.IO;
-//using System.Threading;
-using System.Configuration;
 using FileOrganizerTask;
 
 namespace FileOrganizerService {
     class WindowsService : ServiceBase {
-        public string LogPath = ConfigurationManager.AppSettings["LogFilePath"];
+        public string LogPath = AppDomain.CurrentDomain.BaseDirectory + @"\FileOrganizerServiceLog.txt";
         public GroupCollection GroupCollectionObject;
         public bool Initialized;
         /// <summary>
@@ -53,7 +51,7 @@ namespace FileOrganizerService {
             Log("Started", true);
             try {
                 if (!Initialized) {
-                    GroupCollectionObject = new GroupCollection(ConfigurationManager.AppSettings["FileOrganiserGroupsFilePath"], new TaskDetail(GetTaskDetails));
+                    GroupCollectionObject = new GroupCollection(AppDomain.CurrentDomain.BaseDirectory + @"\FileOrganiserGroups.xml", new TaskDetail(GetTaskDetails));
                     Log("Loaded Groups - " + GroupCollectionObject.GroupListWithTimer.Count.ToString(), true);
                     GroupCollectionObject.ScheduleGroups();
                     Initialized = true;
@@ -143,8 +141,9 @@ namespace FileOrganizerService {
             base.OnSessionChange(changeDescription);
         }
 
-        public void GetTaskDetails(int numberOfFiles, int doneFiles, string fileName, string fileExtension, string fileNewName) {
-            Log("Done : " + doneFiles + "/" + numberOfFiles, true);
+        public void GetTaskDetails(int numberOfFiles, int currentFile, string fileName, string fileExtension, string fileNewName) {
+            if (numberOfFiles == -1) Log("Loading Task...", true);
+            else Log("Done : " + currentFile.ToString() + "/" + numberOfFiles.ToString(), true);
         }
 
         /// <summary>

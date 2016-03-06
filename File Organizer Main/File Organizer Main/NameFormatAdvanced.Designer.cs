@@ -80,7 +80,7 @@
             // 
             // AttributeOptions
             // 
-            this.AttributeOptions.BackColor = System.Drawing.SystemColors.Control;
+            this.AttributeOptions.BackColor = System.Drawing.Color.White;
             this.AttributeOptions.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.AttributeOptions.Location = new System.Drawing.Point(9, 124);
             this.AttributeOptions.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -92,7 +92,7 @@
             // 
             // AttributeSyntaxLabel
             // 
-            this.AttributeSyntaxLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.AttributeSyntaxLabel.BackColor = System.Drawing.Color.White;
             this.AttributeSyntaxLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.AttributeSyntaxLabel.Location = new System.Drawing.Point(9, 73);
             this.AttributeSyntaxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -104,7 +104,7 @@
             // 
             // GroupSyntaxLabel
             // 
-            this.GroupSyntaxLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.GroupSyntaxLabel.BackColor = System.Drawing.Color.White;
             this.GroupSyntaxLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.GroupSyntaxLabel.Location = new System.Drawing.Point(9, 29);
             this.GroupSyntaxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -152,6 +152,7 @@
             // 
             // Done
             // 
+            this.Done.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Done.Location = new System.Drawing.Point(553, 271);
             this.Done.Margin = new System.Windows.Forms.Padding(2);
             this.Done.Name = "Done";
@@ -165,6 +166,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(684, 307);
             this.Controls.Add(this.Done);
             this.Controls.Add(this.NameSpecifier);

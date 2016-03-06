@@ -37,7 +37,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
+            this.VersionLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -153,7 +153,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.VersionLabel);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.pictureBox1);
@@ -164,18 +164,18 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Software";
             // 
-            // label7
+            // VersionLabel
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.VersionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label7.Location = new System.Drawing.Point(6, 194);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(383, 21);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "1.0";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.VersionLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.VersionLabel.Location = new System.Drawing.Point(6, 194);
+            this.VersionLabel.Name = "VersionLabel";
+            this.VersionLabel.Size = new System.Drawing.Size(383, 21);
+            this.VersionLabel.TabIndex = 3;
+            this.VersionLabel.Text = "1.0";
+            this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // label1
             // 
@@ -252,7 +252,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label VersionLabel;
         private System.Windows.Forms.Label label1;
     }
 }

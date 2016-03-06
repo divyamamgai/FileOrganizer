@@ -419,7 +419,7 @@
             this.AddTaskButton.TabIndex = 8;
             this.AddTaskButton.Text = "Add Task";
             this.AddTaskButton.UseVisualStyleBackColor = true;
-            this.AddTaskButton.Click += new System.EventHandler(this.AddTaskButton_Click);
+            this.AddTaskButton.Click += new System.EventHandler(this.AddTaskButtonClick);
             // 
             // TasksFlowPanel
             // 
@@ -466,12 +466,13 @@
             this.DeleteGroup.TabIndex = 11;
             this.DeleteGroup.Text = "Delete Group";
             this.DeleteGroup.UseVisualStyleBackColor = true;
-            this.DeleteGroup.Click += new System.EventHandler(this.DeleteGroup_Click);
+            this.DeleteGroup.Click += new System.EventHandler(this.DeleteGroupClick);
             // 
             // GroupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.DeleteGroup);
             this.Controls.Add(this.CancelCloseButton);

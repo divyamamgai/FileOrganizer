@@ -61,6 +61,7 @@ namespace TaskNameSpace {
             DeleteTaskButton.Visible = true;
             LoadedExtensionsList = new List<string>(TaskObject.ExtensionRegex.ToString().Replace(")", "").Replace("(", "").Split('|'));
             FileTypeCB.SelectedIndex = TaskObject.FileTypeIndex;
+            TaskEnabledCheckBox.Checked = TaskObject.Enabled;
         }
 
         private void BrowseButton_Click(object sender, EventArgs e) {
@@ -138,7 +139,7 @@ namespace TaskNameSpace {
                     sample.Checked = IsChecked;
                     sample2.Enabled = IsChecked;
                 }
-                sample2.Size = new Size(630, 30);
+                sample2.Size = new Size(611, 30);
                 sample2.Tag = data;
                 Tuple<CheckBox, TextBox> c = new Tuple<CheckBox, TextBox>(sample, sample2);
                 FileAttChecks.Add(c);
@@ -175,27 +176,12 @@ namespace TaskNameSpace {
             DisplayFileExtensions(FileTypeCB.SelectedIndex);
             DisplayFileAttributes(FileTypeCB.SelectedIndex);
         }
-        public static bool FormExit() {
-            //try {
-            //    var Result = MessageBox.Show("Are you sure you want to stop creating TaskForm?", "Quit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //    if (Result == DialogResult.Yes) {
-            //        return true;
-            //    }
-            //} catch {
-            //    MessageBox.Show("Error exit mishandled");
-            //}
-            //return false;
-            return true;
-        }
 
         private void CancelTaskbtn_Click(object sender, EventArgs e) {
             this.Close();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e) {
-            if (FormExit() == false) {
-                e.Cancel = true;
-            }
         }
 
         private void SelectAllButton_Click(object sender, EventArgs e) {
@@ -238,7 +224,7 @@ namespace TaskNameSpace {
                     IEnumerable<TextBox> TextBoxList = FileAttributeFLP.Controls.OfType<TextBox>().Where(tO => tO.Enabled == true);
                     foreach (TextBox TextBoxObject in TextBoxList) AttributeMatchBuilder.Append(TextBoxObject.Tag + "?" + TextBoxObject.Text + "|");
                     TaskObject = new Task(TaskIsLoaded ? TaskObject.ID : Options.LastTaskID, TaskName.Text, SourceFolder.Text, DestinationFolder.Text, ExtensionBuilder.ToString(), RegexTextBox.Text,
-                        AttributeMatchBuilder.ToString(), FileNameTB.Text, PerformTypeComboBox.SelectedItem.ToString().ToLower(), FileTypeCB.SelectedIndex);
+                        AttributeMatchBuilder.ToString(), FileNameTB.Text, PerformTypeComboBox.SelectedItem.ToString().ToLower(), FileTypeCB.SelectedIndex, TaskEnabledCheckBox.Checked);
                     Close();
                 } else {
                     MessageBox.Show("File Types cannot be empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
